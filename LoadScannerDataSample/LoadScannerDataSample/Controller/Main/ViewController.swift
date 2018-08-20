@@ -8,6 +8,26 @@
 
 import UIKit
 
+enum ConnectionStatus: Int {
+    case Connecting
+    case Connected
+    case Disconnecting
+    case Disconnected
+    
+    var status: String {
+        switch self {
+        case .Connected:
+            return "Connecting"
+        case .Connecting:
+            return "Connected"
+        case .Disconnecting:
+            return "Disconnecting"
+        case .Disconnected:
+            return "Disconnected"
+        }
+    }
+}
+
 final class ViewController: UIViewController {
     
     // MARK: - Properties
@@ -16,7 +36,7 @@ final class ViewController: UIViewController {
     private var deviceArray = [String]()
     private var deviceName = ""
     private let deviceProvider = DeviceProvider()
-    
+    private var status = 0
     // MARK: - IBOutlet
     @IBOutlet weak var scannerList: UITableView!
     @IBOutlet weak var scanButton: UIButton!
@@ -31,6 +51,7 @@ final class ViewController: UIViewController {
         scanButton.isEnabled = false
         refreshScannerList(needAutoConnect: false)
         setupDeviceTable()
+        statusLabel.text = "Not Connected"
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -66,6 +87,7 @@ final class ViewController: UIViewController {
     }
     @IBAction func scan(_ sender: Any) {
         connectDeviceAndStartScan()
+      
     }
     @IBAction func disconnect(_ sender: Any) {
         self.deviceControl.disconnectScanner()
@@ -75,6 +97,8 @@ final class ViewController: UIViewController {
 extension ViewController: DeviceCtrlDelegate {
     func didDisconnectToTheDevice() {
         print("disconnected gogogo")
+        status = Int(deviceControl.device.connectionStatus.rawValue)
+        statusLabel.text = ConnectionStatus.init(rawValue: status)?.status
     }
     
     private func refreshScannerList(needAutoConnect: Bool) -> Error? {
@@ -94,6 +118,9 @@ extension ViewController: DeviceCtrlDelegate {
     func device(_ deviceInfo: PFUSSDevice!, connectSuccessfully error: Error!) {
         if error == nil {
             self.deviceControl.scanAction(SSSDKScanSettings.shared().settingsDictionary())
+            print("222222")
+            status = Int(deviceControl.device.connectionStatus.rawValue)
+            statusLabel.text = ConnectionStatus.init(rawValue: status)?.status
         } else {
             let alert = SSSDKAlert.sharedAlertController()
             if (error.localizedDescription == String(ERR_WRONG_PASSWORD.rawValue) ||
@@ -119,6 +146,8 @@ extension ViewController: DeviceCtrlDelegate {
             SSSDKAlert.sharedAlertController().show(SSSDKScanAlertTypeError, errorCode:(error?.code)!, withCallBack: { buttonIndex in
             })
         }
+        status = Int(deviceControl.device.connectionStatus.rawValue)
+        statusLabel.text = ConnectionStatus.init(rawValue: status)?.status
     }
     
     func connectDevice(with indexPath: IndexPath!) {
@@ -144,6 +173,8 @@ extension ViewController: DeviceCtrlDelegate {
     func scanFinish() {
         SSSDKAlert.sharedAlertController().dismiss(Int(BUTTON_INDEX_CANCEL.rawValue))
         self.deviceControl.finishScanAction()
+        status = Int(deviceControl.device.connectionStatus.rawValue)
+        statusLabel.text = ConnectionStatus.init(rawValue: status)?.status
     }
     
     func showScanErrorOccurWithErrorCode(_ errorCode: Int) {
