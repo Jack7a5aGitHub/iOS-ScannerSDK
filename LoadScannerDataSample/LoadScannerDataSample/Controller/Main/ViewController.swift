@@ -25,6 +25,8 @@ final class ViewController: UIViewController {
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        // JPEG format Setting
+        SSSDKScanSettings.shared().fileFormat = 0
         deviceControl.delegate = self
         scanButton.isEnabled = false
         refreshScannerList(needAutoConnect: false)
@@ -46,7 +48,7 @@ final class ViewController: UIViewController {
         scanButton.isEnabled = true
         
     }
-
+    
     private func setupDeviceTable() {
         scannerList.delegate = self
         scannerList.dataSource = deviceProvider
@@ -66,7 +68,7 @@ final class ViewController: UIViewController {
         connectDeviceAndStartScan()
     }
     @IBAction func disconnect(_ sender: Any) {
-       self.deviceControl.disconnectScanner()
+        self.deviceControl.disconnectScanner()
     }
 }
 
@@ -93,7 +95,7 @@ extension ViewController: DeviceCtrlDelegate {
         if error == nil {
             self.deviceControl.scanAction(SSSDKScanSettings.shared().settingsDictionary())
         } else {
-         let alert = SSSDKAlert.sharedAlertController()
+            let alert = SSSDKAlert.sharedAlertController()
             if (error.localizedDescription == String(ERR_WRONG_PASSWORD.rawValue) ||
                 error.localizedDescription == String(ERR_INVALID_PASSWORD.rawValue) ) {
                 alert?.show(SSSDKScanAlertTypeWrongPassword, errorCode: 0, withCallBack: { buttonIndex in
@@ -122,7 +124,6 @@ extension ViewController: DeviceCtrlDelegate {
     func connectDevice(with indexPath: IndexPath!) {
         self.deviceControl.connectDevice(with: indexPath.row)
         self.deviceConnected(deviceName: deviceControl.device.deviceName)
-        print("aaa",deviceControl.device.deviceName)
         deviceName = deviceControl.device.deviceName
     }
     
@@ -157,41 +158,42 @@ extension ViewController: DeviceCtrlDelegate {
             return
         }
         arrSSSDKFiles = filesPath
+        print("reload", arrSSSDKFiles)
     }
     
-//    private func removeNewestScanFile() {
-//        let fileManager = FileManager.default
-//        try? fileManager.removeItem(atPath: self.arrSSSDKFiles.lastObject as! String)
-//        arrSSSDKFiles.removeLastObject()
-//        if SSSDKScanSettings.shared().fileFormat == Int(PFUFileFormatOptionJpeg.rawValue) {
-//            try? fileManager.removeItem(atPath: arrSSSDKFiles.lastObject as! String)
-//            arrSSSDKFiles.removeLastObject()
-//        }
-//
-//    }
-
+    //    private func removeNewestScanFile() {
+    //        let fileManager = FileManager.default
+    //        try? fileManager.removeItem(atPath: self.arrSSSDKFiles.lastObject as! String)
+    //        arrSSSDKFiles.removeLastObject()
+    //        if SSSDKScanSettings.shared().fileFormat == Int(PFUFileFormatOptionJpeg.rawValue) {
+    //            try? fileManager.removeItem(atPath: arrSSSDKFiles.lastObject as! String)
+    //            arrSSSDKFiles.removeLastObject()
+    //        }
+    //
+    //    }
+    
     func showMultiFeedOccur() {
         self.scanFinish()
         SSSDKAlert.sharedAlertController().show(SSSDKScanAlertTypeMultiFeed, errorCode: 0) { buttonIndex in
             if buttonIndex == BUTTON_INDEX_DEFAULT {
-               // self.removeNewestScanFile()
+                // self.removeNewestScanFile()
             }
         }
     }
     
     func deliverScanFile(_ pageInfo: Any!) {
-          print("files", arrSSSDKFiles, pageInfo)
+        print("files", pageInfo)
         guard let path = pageInfo as? String else {
             return
         }
         arrSSSDKFiles.append(path)
-
+        
     }
     
 }
 
 extension ViewController: UITableViewDelegate {
-
+    
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         guard let cell = tableView.cellForRow(at: indexPath) as? CustomCell else {
             fatalError()

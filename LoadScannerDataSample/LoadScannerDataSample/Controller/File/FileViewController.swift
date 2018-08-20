@@ -8,12 +8,21 @@
 
 import UIKit
 
+struct Card {
+    var front = ""
+    var back = ""
+}
+
 final class FileViewController: UIViewController {
     
     // MARK: - Properties
     private let fileProvider = FileProvider()
     private var docInteractionController = UIDocumentInteractionController()
+    private var frontList = [String]()
+    private var backList = [String]()
+    private var correctedFiles = [Card]()
     var arrSSSDKFiles = [String]()
+    
     // MARK: - IBOutlet
     @IBOutlet weak var fileListTableView: UITableView!
     
@@ -42,8 +51,17 @@ extension FileViewController {
     private func setupFileTable() {
         fileListTableView.delegate = self
         fileListTableView.dataSource = fileProvider
-        print("filesFetched", arrSSSDKFiles)
-        fileProvider.fetchFileList(files: arrSSSDKFiles)
+        for index in 0..<arrSSSDKFiles.count {
+            if index % 2 == 0 {
+                frontList.append(arrSSSDKFiles[index])
+            } else {
+                backList.append(arrSSSDKFiles[index])
+            }
+        }
+        for index in 0..<frontList.count{
+            correctedFiles.append(Card(front: frontList[index], back: backList[index]))
+        }
+        fileProvider.fetchFileList(files: correctedFiles)
     }
     private func setupDocumentControllerWithPath(path: String) {
         let url = URL(fileURLWithPath: path)

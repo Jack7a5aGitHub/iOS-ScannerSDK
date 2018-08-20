@@ -173,10 +173,12 @@ typedef void (^getDeviceList)(NSArray * deviceList);
     {
         if ([strFrontPage isKindOfClass:[NSString class]])
         {
+            NSLog(@"FrontPage%@", strFrontPage);
             [self.delegate deliverScanFile:strFrontPage];
         }
         if ([strBackPage isKindOfClass:[NSString class]])
         {
+            NSLog(@"BackPage%@", strBackPage);
             [self.delegate deliverScanFile:strBackPage];
         }
     }
@@ -201,6 +203,7 @@ typedef void (^getDeviceList)(NSArray * deviceList);
     id  strPDFPage = [[notification userInfo] objectForKey:SSDevicePDFFilePathKey];
     if ([strPDFPage isKindOfClass:[NSString class]])
     {
+        NSLog(@"PDFPage%@", strPDFPage);
         [self.delegate deliverScanFile:strPDFPage];
     }
 }

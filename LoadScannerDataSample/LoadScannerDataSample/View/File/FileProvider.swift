@@ -9,14 +9,17 @@
 import UIKit
 
 final class FileProvider: NSObject {
-    var fileList = [String]()
+    var fileList = [Card]()
     
-    func fetchFileList(files: [String]) {
+    func fetchFileList(files: [Card]) {
         self.fileList = files
     }
 }
 
 extension FileProvider: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return fileList.count
     }
@@ -24,7 +27,19 @@ extension FileProvider: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: FileCell.identifier, for: indexPath) as? FileCell else {
             fatalError("no cell")
         }
-        cell.fileName = fileList[indexPath.row]
+        
+        if indexPath.section == 0 {
+            cell.fileName = fileList[indexPath.row].front
+        } else {
+             cell.fileName = fileList[indexPath.row].back
+        }
         return cell 
+    }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "表"
+        } else {
+            return "裏"
+        }
     }
 }
