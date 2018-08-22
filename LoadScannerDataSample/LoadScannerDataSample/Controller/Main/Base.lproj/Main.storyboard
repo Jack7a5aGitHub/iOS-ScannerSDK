@@ -47,7 +47,7 @@
                                 <rect key="frame" x="102" y="92" width="170" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Scan"/>
+                                <state key="normal" title="ConnectAndScan"/>
                                 <connections>
                                     <action selector="scan:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tfq-0Y-9zK"/>
                                 </connections>
@@ -75,6 +75,15 @@
                                 <state key="normal" title="Refresh"/>
                                 <connections>
                                     <action selector="refreshAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jgp-vI-hr2"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xdT-UO-Xl9">
+                                <rect key="frame" x="45" y="208" width="74" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Scan"/>
+                                <connections>
+                                    <action selector="scanAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="on1-XF-CCS"/>
                                 </connections>
                             </button>
                         </subviews>

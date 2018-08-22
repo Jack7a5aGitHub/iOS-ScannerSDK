@@ -86,18 +86,29 @@ final class ViewController: UIViewController {
         print("refresh")
     }
     @IBAction func scan(_ sender: Any) {
-        connectDeviceAndStartScan()
-      
+ 
+        if Int(deviceControl.device.scanStatus.rawValue) == 3 {
+            self.deviceControl.scanAction(SSSDKScanSettings.shared().settingsDictionary())
+            
+            status = Int(deviceControl.device.scanStatus.rawValue)
+            statusLabel.text = ConnectionStatus.init(rawValue: status)?.status
+        } else {
+            connectDeviceAndStartScan()
+        }
+        print("scan Status", deviceControl.device.scanStatus)
     }
     @IBAction func disconnect(_ sender: Any) {
         self.deviceControl.disconnectScanner()
+    }
+    @IBAction func scanAction(_ sender: Any) {
+        
     }
 }
 
 extension ViewController: DeviceCtrlDelegate {
     func didDisconnectToTheDevice() {
         print("disconnected gogogo")
-        status = Int(deviceControl.device.connectionStatus.rawValue)
+        status = Int(deviceControl.device.scanStatus.rawValue)
         statusLabel.text = ConnectionStatus.init(rawValue: status)?.status
     }
     
@@ -118,10 +129,11 @@ extension ViewController: DeviceCtrlDelegate {
     func device(_ deviceInfo: PFUSSDevice!, connectSuccessfully error: Error!) {
         if error == nil {
             self.deviceControl.scanAction(SSSDKScanSettings.shared().settingsDictionary())
-            print("222222")
-            status = Int(deviceControl.device.connectionStatus.rawValue)
+            
+            status = Int(deviceControl.device.scanStatus.rawValue)
             statusLabel.text = ConnectionStatus.init(rawValue: status)?.status
         } else {
+            
             let alert = SSSDKAlert.sharedAlertController()
             if (error.localizedDescription == String(ERR_WRONG_PASSWORD.rawValue) ||
                 error.localizedDescription == String(ERR_INVALID_PASSWORD.rawValue) ) {
@@ -142,11 +154,12 @@ extension ViewController: DeviceCtrlDelegate {
     
     func connectDeviceAndStartScan() {
         let error = self.deviceControl.connectScanner() as NSError?
+        
         if error != nil {
-            SSSDKAlert.sharedAlertController().show(SSSDKScanAlertTypeError, errorCode:(error?.code)!, withCallBack: { buttonIndex in
-            })
+            SSSDKAlert.sharedAlertController().show(SSSDKScanAlertTypeConnectError, errorCode: (error?.code)!) { buttonIndex in
+            }
         }
-        status = Int(deviceControl.device.connectionStatus.rawValue)
+        status = Int(deviceControl.device.scanStatus.rawValue)
         statusLabel.text = ConnectionStatus.init(rawValue: status)?.status
     }
     
@@ -157,7 +170,7 @@ extension ViewController: DeviceCtrlDelegate {
     }
     
     func doDisconnection(_ indexPath: IndexPath!) {
-        self.deviceControl.disconnectScanner()
+        self.deviceControl.device.disconnect()
         print("Disconnected")
         //scanButton.isEnabled = false
     }
@@ -171,9 +184,10 @@ extension ViewController: DeviceCtrlDelegate {
     }
     
     func scanFinish() {
+        
         SSSDKAlert.sharedAlertController().dismiss(Int(BUTTON_INDEX_CANCEL.rawValue))
         self.deviceControl.finishScanAction()
-        status = Int(deviceControl.device.connectionStatus.rawValue)
+        status = Int(deviceControl.device.scanStatus.rawValue)
         statusLabel.text = ConnectionStatus.init(rawValue: status)?.status
     }
     
@@ -189,7 +203,6 @@ extension ViewController: DeviceCtrlDelegate {
             return
         }
         arrSSSDKFiles = filesPath
-        print("reload", arrSSSDKFiles)
     }
     
     //    private func removeNewestScanFile() {

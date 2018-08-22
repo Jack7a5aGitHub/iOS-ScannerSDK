@@ -195,6 +195,7 @@ typedef void (^getDeviceList)(NSArray * deviceList);
 {
     [self.device endScanSession];
     [self disconnectScanner];
+    NSLog(@"finishScanACtion");
 }
 
 //Step 5:Get path of created PDF.

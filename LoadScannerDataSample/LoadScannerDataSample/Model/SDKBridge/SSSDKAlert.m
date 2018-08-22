@@ -13,7 +13,7 @@
 
 typedef void (^scanAlertType)(BUTTON_INDEX buttonIndex);
 
-@interface SSSDKAlert ()
+@interface SSSDKAlert()
 
 @property (copy, nonatomic) scanAlertType callBackBlock;
 
@@ -143,28 +143,37 @@ typedef void (^scanAlertType)(BUTTON_INDEX buttonIndex);
     }
     self.scanAlertType = SSSDKScanAlertTypeOthers;
 }
-
+    
 - (void)cancelAction {
+     DeviceControl * deviceControlDelegate = (DeviceControl *)[DeviceControl alloc];
     if (self.callBackBlock == nil) {
-        
+     
         //AppDelegate * appDelegate    = (AppDelegate *)[UIApplication sharedApplication].delegate;
         switch (self.scanAlertType) {
             case SSSDKScanAlertTypeContinueScan:
             case SSSDKScanAlertTypeScanPaused:
               //  [appDelegate scanFinish];
+            
                 break;
             default:
+            
+            NSLog(@"Cancel Action default %u", deviceControlDelegate.device.scanStatus);
+            [deviceControlDelegate disconnectScanner];
+            [deviceControlDelegate.device endScanSession];
+
               //  [appDelegate.deviceCtrl.device cancelScan];
                 break;
         }
     }
     else {
+        NSLog(@"Cancel Action default callBackBlock is not nil %u", deviceControlDelegate.device.scanStatus);
         self.callBackBlock(BUTTON_INDEX_CANCEL);
     }
 }
 
 - (void)defaultAction {
     if (self.callBackBlock == nil) {
+        DeviceControl * deviceControlDelegate = (DeviceControl *)[DeviceControl alloc];
        // AppDelegate    *appDelegate    = (AppDelegate *)[UIApplication sharedApplication].delegate;
         switch (self.scanAlertType) {
             case SSSDKScanAlertTypeContinueScan:
@@ -175,6 +184,7 @@ typedef void (^scanAlertType)(BUTTON_INDEX buttonIndex);
                // [appDelegate continueScan:[[SSSDKScanSettings sharedScanSettings] settingsDictionary]];
                 break;
             default:
+            [deviceControlDelegate finishScanAction];
                // [appDelegate scanFinish];
                 break;
         }
