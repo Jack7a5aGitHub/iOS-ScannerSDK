@@ -28,21 +28,19 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rs9-nU-Yhu">
-                                                    <rect key="frame" x="15" y="0.0" width="345" height="20.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rQi-ma-qmD">
+                                                    <rect key="frame" x="112" y="-1" width="150" height="60"/>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="Rs9-nU-Yhu" secondAttribute="trailing" constant="15" id="6Zc-Ry-qeR"/>
-                                                <constraint firstItem="Rs9-nU-Yhu" firstAttribute="leading" secondItem="Fhc-cd-EUQ" secondAttribute="leading" constant="15" id="PBD-aV-dsu"/>
-                                                <constraint firstItem="Rs9-nU-Yhu" firstAttribute="top" secondItem="Fhc-cd-EUQ" secondAttribute="top" id="mcB-lO-GHn"/>
+                                                <constraint firstAttribute="bottom" secondItem="rQi-ma-qmD" secondAttribute="bottom" constant="0.5" id="05L-gt-Rhe"/>
+                                                <constraint firstItem="rQi-ma-qmD" firstAttribute="top" secondItem="Fhc-cd-EUQ" secondAttribute="top" constant="-1" id="TuE-bk-per"/>
+                                                <constraint firstItem="rQi-ma-qmD" firstAttribute="leading" secondItem="Fhc-cd-EUQ" secondAttribute="leading" constant="112" id="XgW-6c-cUv"/>
+                                                <constraint firstAttribute="trailing" secondItem="rQi-ma-qmD" secondAttribute="trailing" constant="113" id="es6-X7-wuu"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="fileNameLabel" destination="Rs9-nU-Yhu" id="ECG-L2-HIh"/>
+                                            <outlet property="cardImageView" destination="rQi-ma-qmD" id="vrZ-r9-dVY"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

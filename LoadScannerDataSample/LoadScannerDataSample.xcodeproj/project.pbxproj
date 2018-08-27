@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0A095BCF211989410086C517 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A095BCE211989410086C517 /* ViewController.swift */; };
 		0A095BD221198B640086C517 /* SsSvcMobileWIFIFrmwk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A095BD021198B640086C517 /* SsSvcMobileWIFIFrmwk.framework */; };
+		0A2144D52133962C00A3BE39 /* ImageOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2144D42133962C00A3BE39 /* ImageOrientation.swift */; };
 		0A86347F211922F700FE194D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A86347E211922F700FE194D /* AppDelegate.swift */; };
 		0A863484211922F700FE194D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A863482211922F700FE194D /* Main.storyboard */; };
 		0A863486211922FC00FE194D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A863485211922FC00FE194D /* Assets.xcassets */; };
@@ -29,6 +30,7 @@
 /* Begin PBXFileReference section */
 		0A095BCE211989410086C517 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0A095BD021198B640086C517 /* SsSvcMobileWIFIFrmwk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SsSvcMobileWIFIFrmwk.framework; sourceTree = "<group>"; };
+		0A2144D42133962C00A3BE39 /* ImageOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageOrientation.swift; sourceTree = "<group>"; };
 		0A86347B211922F700FE194D /* LoadScannerDataSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoadScannerDataSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A86347E211922F700FE194D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A863483211922F700FE194D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -65,6 +67,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A2144D3213395F200A3BE39 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				0A2144D42133962C00A3BE39 /* ImageOrientation.swift */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
 		0A863472211922F600FE194D = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +162,7 @@
 		0AA7F80F212A51EC0011DED6 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				0A2144D3213395F200A3BE39 /* UIKit */,
 				0AA7F810212A51F20011DED6 /* Foundation */,
 			);
 			path = Extension;
@@ -275,6 +286,7 @@
 				0AAEDCF5211AB4EC00B8E1DF /* CustomCell.swift in Sources */,
 				0AA7F81B212A5AB80011DED6 /* FileCell.swift in Sources */,
 				0AA7F817212A5A2C0011DED6 /* FileProvider.swift in Sources */,
+				0A2144D52133962C00A3BE39 /* ImageOrientation.swift in Sources */,
 				0AAEDCEA2119A22A00B8E1DF /* DeviceControl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
