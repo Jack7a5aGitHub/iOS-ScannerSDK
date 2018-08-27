@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import QuickLook
 
 struct Card {
     var front = ""
@@ -24,6 +25,8 @@ final class FileViewController: UIViewController {
     var arrSSSDKFiles = [String]()
     
     // MARK: - IBOutlet
+    
+    @IBOutlet weak var cardsCollectionView: UICollectionView!
     @IBOutlet weak var fileListTableView: UITableView!
     
     // MARK: - Factory
@@ -41,16 +44,16 @@ final class FileViewController: UIViewController {
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupFileTable()
+        setupCardCollection()
     }
     
 }
 
-// MARK: - Private func
+// MARK: - Private func for CollectionView
 extension FileViewController {
-    private func setupFileTable() {
-        fileListTableView.delegate = self
-        fileListTableView.dataSource = fileProvider
+    private func setupCardCollection() {
+        cardsCollectionView.delegate = self
+        cardsCollectionView.dataSource = fileProvider
         for index in 0..<arrSSSDKFiles.count {
             if index % 2 == 0 {
                 frontList.append(arrSSSDKFiles[index])
@@ -62,12 +65,23 @@ extension FileViewController {
             correctedFiles.append(Card(front: frontList[index], back: backList[index]))
         }
         fileProvider.fetchFileList(files: correctedFiles)
+        registerNib()
     }
+    private func registerNib() {
+        let cardCollectionCellNib = UINib(nibName: CardCollectionCell.nibName, bundle: nil)
+        cardsCollectionView.register(cardCollectionCellNib, forCellWithReuseIdentifier: CardCollectionCell.identifier)
+    }
+    
+}
+
+// MARK: - Private func for read Documents file
+extension FileViewController {
     private func setupDocumentControllerWithPath(path: String) {
         let url = URL(fileURLWithPath: path)
         docInteractionController = UIDocumentInteractionController.init(url: url)
         docInteractionController.delegate = self
         docInteractionController.presentPreview(animated: true)
+        
     }
 }
 
@@ -78,20 +92,25 @@ extension FileViewController: UIDocumentInteractionControllerDelegate {
     }
 }
 
-// MARK: - UITableViewDelegate
-extension FileViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
-    }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
-    }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        guard let cell = tableView.cellForRow(at: indexPath) as? FileCell,
-              let path = cell.fileName  else {
-            return
+// MARK: - UICollectionViewDelegate
+extension FileViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? CardCollectionCell,
+            let path = cell.fileName else {
+                print("return")
+                return
         }
-        setupDocumentControllerWithPath(path: path)
+        //let url = URL(fileURLWithPath: path)
+        let previewVC = PreviewViewController.make(filePath: path)
+        navigationController?.pushViewController(previewVC, animated: true)
+    }
+}
+
+// MARK: - UICollectionViewDelegateFlowlayout
+extension FileViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = cardsCollectionView.bounds.width
+        let height = width * 3 / 4
+        return CGSize(width: width, height: height)
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import QuickLook
 
 final class FileProvider: NSObject {
     var fileList = [Card]()
@@ -16,30 +17,15 @@ final class FileProvider: NSObject {
     }
 }
 
-extension FileProvider: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension FileProvider: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return fileList.count
     }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: FileCell.identifier, for: indexPath) as? FileCell else {
-            fatalError("no cell")
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CardCollectionCell.identifier, for: indexPath) as? CardCollectionCell else {
+            fatalError("no cells")
         }
-        
-        if indexPath.section == 0 {
-            cell.fileName = fileList[indexPath.row].front
-        } else {
-             cell.fileName = fileList[indexPath.row].back
-        }
-        return cell 
-    }
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return "表"
-        } else {
-            return "裏"
-        }
+        cell.fileName = fileList[indexPath.item].front
+        return cell
     }
 }

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="P8a-em-ZGR">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Preview View Controller-->
+        <scene sceneID="5P7-pK-Xrd">
+            <objects>
+                <viewController storyboardIdentifier="PreviewViewController" id="jRZ-Hg-wgw" customClass="PreviewViewController" customModule="LoadScannerDataSample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KFH-wg-gCO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="myF-Ec-mKQ">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem title="Item" id="vCG-0V-Syv"/>
+                                </items>
+                            </toolbar>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WQP-ex-aJP">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem title="Bin" id="crj-A5-xN1"/>
+                                    <barButtonItem title="Left" id="mDH-mQ-Frp">
+                                        <connections>
+                                            <action selector="leftRotation:" destination="jRZ-Hg-wgw" id="dgu-vc-Lr6"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Right" id="atF-XI-f2I"/>
+                                </items>
+                            </toolbar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="24K-NQ-t1w">
+                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="WQP-ex-aJP" firstAttribute="bottom" secondItem="x1L-lN-HjZ" secondAttribute="bottom" id="BLJ-W6-fAJ"/>
+                            <constraint firstItem="myF-Ec-mKQ" firstAttribute="leading" secondItem="x1L-lN-HjZ" secondAttribute="leading" id="OUz-ZB-uUx"/>
+                            <constraint firstItem="24K-NQ-t1w" firstAttribute="trailing" secondItem="x1L-lN-HjZ" secondAttribute="trailing" id="QnQ-jx-uPL"/>
+                            <constraint firstItem="24K-NQ-t1w" firstAttribute="top" secondItem="x1L-lN-HjZ" secondAttribute="top" id="d0p-gT-SvY"/>
+                            <constraint firstItem="24K-NQ-t1w" firstAttribute="leading" secondItem="x1L-lN-HjZ" secondAttribute="leading" id="dQc-1f-lbG"/>
+                            <constraint firstItem="myF-Ec-mKQ" firstAttribute="bottom" secondItem="x1L-lN-HjZ" secondAttribute="bottom" id="eHx-JQ-gDJ"/>
+                            <constraint firstItem="WQP-ex-aJP" firstAttribute="leading" secondItem="x1L-lN-HjZ" secondAttribute="leading" id="pAY-Ue-V1u"/>
+                            <constraint firstItem="myF-Ec-mKQ" firstAttribute="trailing" secondItem="x1L-lN-HjZ" secondAttribute="trailing" id="phR-ch-HLs"/>
+                            <constraint firstItem="myF-Ec-mKQ" firstAttribute="top" secondItem="24K-NQ-t1w" secondAttribute="bottom" id="xIc-av-xX9"/>
+                            <constraint firstItem="WQP-ex-aJP" firstAttribute="trailing" secondItem="x1L-lN-HjZ" secondAttribute="trailing" id="zXX-Pi-SaY"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="x1L-lN-HjZ"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="mKB-UR-wo4">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="3pK-zX-MsE">
+                            <connections>
+                                <action selector="backOrCancelAction:" destination="jRZ-Hg-wgw" id="aVA-mF-HTf"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="a8b-Yf-5fJ">
+                            <connections>
+                                <action selector="editAction:" destination="jRZ-Hg-wgw" id="0eV-Jf-fY8"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="cancelButton" destination="3pK-zX-MsE" id="vgc-sh-5Ef"/>
+                        <outlet property="editButton" destination="a8b-Yf-5fJ" id="6yl-6C-0ZS"/>
+                        <outlet property="editToolBar" destination="WQP-ex-aJP" id="LgT-Er-5Jm"/>
+                        <outlet property="normalToolBar" destination="myF-Ec-mKQ" id="4XD-Fj-DNH"/>
+                        <outlet property="previewImageView" destination="24K-NQ-t1w" id="EJl-f3-ljP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wZE-pK-RD6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1296.8" y="-146.17691154422789"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="VPb-CH-deH">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="P8a-em-ZGR" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="CKC-WH-W8i">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="jRZ-Hg-wgw" kind="relationship" relationship="rootViewController" id="pwO-Z6-soN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jy9-PT-gFm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="357.60000000000002" y="-146.17691154422789"/>
+        </scene>
+    </scenes>
+</document>

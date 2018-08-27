@@ -10,6 +10,10 @@
 		0A095BCF211989410086C517 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A095BCE211989410086C517 /* ViewController.swift */; };
 		0A095BD221198B640086C517 /* SsSvcMobileWIFIFrmwk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A095BD021198B640086C517 /* SsSvcMobileWIFIFrmwk.framework */; };
 		0A2144D52133962C00A3BE39 /* ImageOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2144D42133962C00A3BE39 /* ImageOrientation.swift */; };
+		0A2144D82133B7D500A3BE39 /* CardCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2144D62133B7D500A3BE39 /* CardCollectionCell.swift */; };
+		0A2144D92133B7D500A3BE39 /* CardCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2144D72133B7D500A3BE39 /* CardCollectionCell.xib */; };
+		0A2144DF2133D39900A3BE39 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2144DE2133D39900A3BE39 /* PreviewViewController.swift */; };
+		0A2144E12133D3AD00A3BE39 /* PreviewViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A2144E02133D3AD00A3BE39 /* PreviewViewController.storyboard */; };
 		0A86347F211922F700FE194D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A86347E211922F700FE194D /* AppDelegate.swift */; };
 		0A863484211922F700FE194D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A863482211922F700FE194D /* Main.storyboard */; };
 		0A863486211922FC00FE194D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A863485211922FC00FE194D /* Assets.xcassets */; };
@@ -31,6 +35,10 @@
 		0A095BCE211989410086C517 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0A095BD021198B640086C517 /* SsSvcMobileWIFIFrmwk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SsSvcMobileWIFIFrmwk.framework; sourceTree = "<group>"; };
 		0A2144D42133962C00A3BE39 /* ImageOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageOrientation.swift; sourceTree = "<group>"; };
+		0A2144D62133B7D500A3BE39 /* CardCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCollectionCell.swift; sourceTree = "<group>"; };
+		0A2144D72133B7D500A3BE39 /* CardCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardCollectionCell.xib; sourceTree = "<group>"; };
+		0A2144DE2133D39900A3BE39 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
+		0A2144E02133D3AD00A3BE39 /* PreviewViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PreviewViewController.storyboard; sourceTree = "<group>"; };
 		0A86347B211922F700FE194D /* LoadScannerDataSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoadScannerDataSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A86347E211922F700FE194D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A863483211922F700FE194D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -155,6 +163,8 @@
 			children = (
 				0AA7F80B212A51CD0011DED6 /* FileViewController.swift */,
 				0AA7F80D212A51DF0011DED6 /* FileViewController.storyboard */,
+				0A2144DE2133D39900A3BE39 /* PreviewViewController.swift */,
+				0A2144E02133D3AD00A3BE39 /* PreviewViewController.storyboard */,
 			);
 			path = File;
 			sourceTree = "<group>";
@@ -190,6 +200,8 @@
 			children = (
 				0AA7F816212A5A2C0011DED6 /* FileProvider.swift */,
 				0AA7F81A212A5AB80011DED6 /* FileCell.swift */,
+				0A2144D62133B7D500A3BE39 /* CardCollectionCell.swift */,
+				0A2144D72133B7D500A3BE39 /* CardCollectionCell.xib */,
 			);
 			path = File;
 			sourceTree = "<group>";
@@ -263,6 +275,8 @@
 			files = (
 				0A863489211922FC00FE194D /* LaunchScreen.storyboard in Resources */,
 				0A863486211922FC00FE194D /* Assets.xcassets in Resources */,
+				0A2144E12133D3AD00A3BE39 /* PreviewViewController.storyboard in Resources */,
+				0A2144D92133B7D500A3BE39 /* CardCollectionCell.xib in Resources */,
 				0A863484211922F700FE194D /* Main.storyboard in Resources */,
 				0AA7F80E212A51DF0011DED6 /* FileViewController.storyboard in Resources */,
 			);
@@ -283,7 +297,9 @@
 				0A86347F211922F700FE194D /* AppDelegate.swift in Sources */,
 				0AAEDCF3211AAFFE00B8E1DF /* SSSDKUtil.m in Sources */,
 				0AA7F812212A52B10011DED6 /* NSObject+ClassName.swift in Sources */,
+				0A2144DF2133D39900A3BE39 /* PreviewViewController.swift in Sources */,
 				0AAEDCF5211AB4EC00B8E1DF /* CustomCell.swift in Sources */,
+				0A2144D82133B7D500A3BE39 /* CardCollectionCell.swift in Sources */,
 				0AA7F81B212A5AB80011DED6 /* FileCell.swift in Sources */,
 				0AA7F817212A5A2C0011DED6 /* FileProvider.swift in Sources */,
 				0A2144D52133962C00A3BE39 /* ImageOrientation.swift in Sources */,
